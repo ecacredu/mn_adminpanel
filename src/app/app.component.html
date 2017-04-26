@@ -1,0 +1,21 @@
+<div class="container-fluid appPage">
+	<!-- <as-userList [brand]="appBrand"></as-userList> -->
+	<div class="header ">
+		<div class=" content row">
+			<div class="col-xs-4 title">
+				<p>My Nagarsevak</p>
+			</div>
+			<div class="col-xs-8 menu">
+				<ul *ngIf="login.checkUserStatus">
+					<!--<li *ngIf="login.checkUserStatus"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> <span>My Account</span></li>-->
+					<li routerLink="/allissues"><span>All Issues</span></li>
+					<li  routerLink="/pending-issues"><span>Pending Issues</span></li>
+					<li routerLink="/chats"><span>Chats</span></li>
+					<li (click)="login.logout()"><span>Log-Out</span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<router-outlet></router-outlet>
+</div>

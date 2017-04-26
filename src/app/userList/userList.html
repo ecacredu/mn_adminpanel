@@ -1,0 +1,84 @@
+<div class="container-fluid UserList">
+	<div class="Title">
+		<p>User List</p>
+	</div>
+	<hr>
+	<div class="Filters">
+		<div class="row filterFields">
+			<div class="col-md-2 Field">
+					<div class="FieldName">
+						<p>Email Text</p>
+					</div>
+					<div class="textField">
+						<input [(ngModel)]="email" type="text" name="" value="" placeholder="search by email..">
+					</div>
+			</div>
+			<div class="col-md-2 Field">
+					<div class="FieldName">
+						<p>Phone Number</p>
+					</div>
+					<div class="textField">
+						<input [(ngModel)]="phone" type="text" name="" value="" placeholder="search by phone..">
+					</div>
+			</div>
+			<div class="col-md-2 Field">
+					<!--<div class="FieldName">
+						<p>Number Of Leads</p>
+					</div>
+					<div class="textField">
+						<input type="text" name="" value="" placeholder="Leads less than..">
+					</div>-->
+			</div>
+			<div class="col-md-2 Field">
+					<!--<div class="FieldName">
+						<p>No of days</p>
+					</div>
+					<div class="textField">
+						<input type="text" name="" value="" placeholder="expiring in..">
+					</div>-->
+			</div>
+			<div class="col-md-2 Field search">
+					<!--<div class="FieldName">
+						<p>.....</p>
+					</div>
+					<div class="SearchButton">
+						<button type="button" name="button">Search</button>
+					</div>-->
+			</div>
+			<div class="col-md-2 Field Total">
+					<div class="FieldName">
+						<p>..</p>
+					</div>
+					<div class="Totalvalue">
+						<span class="key">Total: </span><span class="value">{{userdata.countUser}}</span>
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="userListTable">
+		<table class="table table-striped table-bordered accountsTable">
+		    <thead>
+					<tr>
+						<th class="col-xs-3">Email</th>
+						<th class="col-xs-2">Phone</th>
+						<th class="col-xs-2">Created Date</th>
+						<th class="col-xs-2">Last Login</th>
+						<th class="col-xs-3">Action</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+					<tr *ngFor="let user of userdata.Users | async | emailFilter:email:phone | paginate: { itemsPerPage: 20, currentPage: p } ">
+	 	 				<th class="col-xs-3">{{user.profile.EmailAddress}}</th>
+	 	 				<th class="col-xs-2">{{user.profile.ContactNumber}}</th>
+	 	 				<th class="col-xs-2">{{user.firstTime}}</th>
+	 	 				<th class="col-xs-2">{{user.recentTime}}</th>
+	 	 				<th class="col-xs-3"><i class="fa fa-user" aria-hidden="true"></i> <i class="fa fa-shopping-cart" aria-hidden="true"></i> <i class="fa fa-times" aria-hidden="true"></i></th>
+ 	       </tr>
+		    </tbody>
+		  </table>
+	</div>
+
+	<div class="pagination">
+		<pagination-controls (pageChange)="p = $event"></pagination-controls>
+	</div>
+</div>

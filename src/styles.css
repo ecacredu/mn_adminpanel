@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.ng2-pagination li{
+	cursor: pointer;
+}
+.UserList .chatModal .modal .modal-dialog .modal-content{border-radius:0}
+.UserList .chatModal .modal .modal-dialog .modal-content .modal-header{padding: 8% 0 1%}
+.UserList .chatModal .modal .modal-dialog .modal-content .modal-header .close{position:absolute;right:1%;top:1%;outline: none}
+.UserList .chatModal .modal .modal-dialog .modal-content .modal-header modal-header .name p{margin:0}
+.UserList .chatModal .modal .modal-dialog .modal-content .modal-header modal-header .address{text-align:right}
+.UserList .chatModal .modal .modal-dialog .modal-content .modal-header modal-header .address p{margin:0}
+.modal-footer{
+	border-top: 0;
+}
+.chatBox{
+		height: 250px;
+    overflow-y: auto;
+    border: 1px solid black;
+    /*padding: 1%;*/
+}
+.sender{
+	background-color: #d8d8d8;
+	padding: 1%;
+}
+.senderName p{
+	color: black;
+	margin: 0.5% 0;
+}
+
+.receiver{
+	background-color: #122F67;
+	padding: 1%;
+}
+.receiverName p{
+	color: #fff;
+	margin: 0.5% 0;
+}
+.chatMessage p{
+	color: #989898;
+	margin: 0.5% 0;
+}
+.textInputDiv,.messageSendButtonDiv{
+	padding: 0
+}
+.textInputDiv input{
+		width: 100%;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 1.3rem;
+    border: 1px solid rgba(132, 132, 132, 0.66);
+		outline: none;
+}
+.messageSendButtonDiv button{
+	border-radius: 0;
+    width: 100%;
+    height: 30px;
+    padding: 0;
+		outline: none;
+		background-color: #122F67;
+}
