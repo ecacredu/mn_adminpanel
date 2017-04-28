@@ -7,6 +7,8 @@ import { LoginService, UserdataService} from './services/index';
 })
 export class AppComponent {
 	constructor(private login:LoginService, private issue:UserdataService) {
+    console.log('App launched!');
+    
 	}
 
 

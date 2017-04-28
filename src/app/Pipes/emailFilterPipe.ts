@@ -4,6 +4,8 @@ import { userListComponent } from '../userList/index';
 
 @Pipe({ name: 'emailFilter' })
 export class emailFilterPipe implements PipeTransform {
+
+	
   transform(Issues: any,value:any,searched:any,society:any,status:any) {
 		if(Issues==null){
 			return [];
@@ -23,8 +25,6 @@ checkIssue(issue:any,searched:any){
 }
 
 checkSociety(issue:any,society:any){
-	console.log(issue.society);
-	console.log(society);
 	if(!society){
 		return true;
 	}

@@ -3,10 +3,14 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {emailFilterPipe} from './emailFilterPipe';
+import {queryFilterPipe} from './queryFilterPipe';
+import {chatsFilterPipe} from './chatsFilter';
 @NgModule({
     declarations: [
         // loginComponent
 				emailFilterPipe,
+                queryFilterPipe,
+                chatsFilterPipe
     ],
     imports: [
         RouterModule,
@@ -16,6 +20,8 @@ import {emailFilterPipe} from './emailFilterPipe';
     exports: [
         // loginComponent
 				emailFilterPipe,
+                queryFilterPipe,
+                chatsFilterPipe
     ]
 })
 export class PipeModule {

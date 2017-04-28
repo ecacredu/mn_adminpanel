@@ -1,18 +1,18 @@
 <div class="container-fluid UserList">
 	<div class="Filters">
 		<div class="row filterFields">
-			<div class="col-md-3 Field">
+			<div class="col-sm-3 Field">
 					<div class="textField">
 						<h4>Pending Issues ({{issue.pendingIssues}} Issues)</h4>
 					</div>
 			</div>
 
-			<div class="col-md-3 Field">
+			<div class="col-sm-3 Field">
 					<div class="textField">
 						<input [(ngModel)]="searchedIssue" type="text" name="" value="" placeholder="search an issue..">
 					</div>
 			</div>
-			<div class="col-md-2 Field">
+			<div class="col-sm-2 Field">
 					<div class="textField">
 						<select [(ngModel)]="society">
 							<option value="">Society</option>
@@ -23,13 +23,13 @@
 						</select>
 					</div>
 			</div>
-			<div class="col-md-2 Field">
+			<div class="col-sm-2 Field">
 					<div class="textField">
 						<select [(ngModel)]="status">
 							<option value="">Status</option>
-						  <option value="Unresolved">Unresolved</option>
-						  <option value="Resolved">Resolved</option>
-						  <option value="Spam">Spam</option>
+						  <option value="unresolved">Unresolved</option>
+						  <option value="resolved">Resolved</option>
+						  <option value="spam">Spam</option>
 						</select>
 					</div>
 			</div>
@@ -65,11 +65,10 @@
 						<h3>13.04.2017 10:20PM</h3>
 					</div>
 					<div class="col-xs-6 issueValue">
-						<select >
-						  <option value="volvo">Volvo</option>
-						  <option value="saab">Saab</option>
-						  <option value="mercedes">Mercedes</option>
-						  <option value="audi">Audi</option>
+						<select [(ngModel)]="issue.status" (change)="onValueChange($event,issue.$key)">
+						  <option value="unresolved">Unresolved</option>
+						  <option value="resolved">Resolved</option>
+						  <option value="spam">Spam</option>
 						</select>
 					</div>
 				</div>

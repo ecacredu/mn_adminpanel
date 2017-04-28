@@ -1,37 +1,39 @@
 <div class="container-fluid UserList">
 	<div class="Filters">
 		<div class="row filterFields">
-			<div class="col-md-3 Field">
-					<div class="textField">
-						<h4>Chats</h4>
-					</div>
+			<div class="col-sm-3 Field">
+				<div class="textField">
+					<h4>Chats</h4>
+				</div>
 			</div>
 
-			<div class="col-md-3 Field">
-					<div class="textField">
-						<input [(ngModel)]="searchedIssue" type="text" name="" value="" placeholder="search an issue..">
-					</div>
+			<div class="col-sm-3 Field">
+				<div class="textField">
+					<input [(ngModel)]="searchedIssue" type="text" name="" value="" placeholder="search an issue..">
+				</div>
 			</div>
-			<div class="col-md-2 Field">
-					<div class="textField">
-						<select [(ngModel)]="society">
-							<option value="">Society</option>
+			<div class="col-sm-2 Field">
+				<div class="textField">
+					<select [(ngModel)]="society">
+						<option value="">Society</option>
 						  <option value="Belgium">Belgium</option>
 						  <option value="Society 1">Society 1</option>
 						  <option value="Maharashtra">Maharashtra</option>
 						  <option value="Chandigad">Chandigad</option>
+						  <option value="France">France</option>
+						  <option value="J K Apartments">J K Apartments</option> 
 						</select>
-					</div>
+				</div>
 			</div>
-			<div class="col-md-2 Field">
-					<div class="textField">
-						<select [(ngModel)]="status">
+			<div class="col-sm-2 Field">
+				<div class="textField">
+					<select [(ngModel)]="status">
 							<option value="">Status</option>
-						  <option value="Unresolved">Unresolved</option>
-						  <option value="Resolved">Resolved</option>
-						  <option value="Spam">Spam</option>
+						  <option value="unresolved">Unresolved</option>
+						  <option value="resolved">Resolved</option>
+						  <option value="spam">Spam</option>
 						</select>
-					</div>
+				</div>
 			</div>
 			<div class="col-md-2 Field">
 			</div>
@@ -40,102 +42,85 @@
 
 
 
-    <button (click)="myModal.open()" style="margin-top:10%;">open my modal</button>
-    <modal #myModal class="chatModal">
-        <modal-header>
-            <div class="col-sm-6 name">
-            	<p>Akash Sadavarte</p>
-            </div>
-						<div class="col-sm-6 address">
-            	<p>Vashi, Navi Mumbai</p>
-            </div>
-        </modal-header>
-        <modal-content>
-            <div class="chatBox">
-							<div class="sender">
-								<div class="senderName">
-									<p>Akash Sadavarte</p>
-								</div>
-								<div class="senderMessage chatMessage">
-									<p>How are You</p>
-								</div>
-							</div>
-            	<div class="receiver">
-            		<div class="receiverName">
-            			<p>Prafull Nikose</p>
-            		</div>
-								<div class="receiverMessage chatMessage">
-									<p>I am fine</p>
-								</div>
-            	</div>
-							<div class="sender">
-								<div class="senderName">
-									<p>Akash Sadavarte</p>
-								</div>
-								<div class="senderMessage chatMessage">
-									<p>How are You</p>
-								</div>
-							</div>
-							<div class="receiver">
-            		<div class="receiverName">
-            			<p>Prafull Nikose</p>
-            		</div>
-								<div class="receiverMessage chatMessage">
-									<p>I am fine</p>
-								</div>
-            	</div>
-							<div class="sender">
-								<div class="senderName">
-									<p>Akash Sadavarte</p>
-								</div>
-								<div class="senderMessage chatMessage">
-									<p>How are You</p>
-								</div>
-							</div>
-            </div>
-        </modal-content>
-        <modal-footer>
-					<div class="col-sm-10 textInputDiv">
-						<input type="text" name="" value="" placeholder="Type your message..">
+	<!--<button (click)="myModal.open()" style="margin-top:10%;">open my modal</button>-->
+	<modal #myModal class="chatModal">
+		<modal-header>
+			<div class="col-sm-6 name">
+				<p>{{currentChat?.userName}}</p>
+			</div>
+			<div class="col-sm-6 address">
+				<p>{{currentChat?.user.society}}, {{currentChat?.user.area}}</p>
+			</div>
+		</modal-header>
+		{{currentChatMessages | async | json}}
+		<modal-content>
+			<div #scrollMe class="chatBox">
+				<div *ngFor="let message of currentChatMessages | async">
+					<!--Akash {{message | json}}-->
+					<div *ngIf="message.senderType=='user'" class="sender">
+
+						<div class="senderName">
+							<p>{{currentChat?.userName}}</p>
+						</div>
+						<div class="senderMessage chatMessage">
+							<p>{{message.message}}</p>
+						</div>
 					</div>
-					<div class="col-sm-2 messageSendButtonDiv">
-						<button class="btn btn-primary">Send</button>
+					<div *ngIf="message.senderType=='agent'" class="receiver">
+						<div class="receiverName">
+							<p>Me</p>
+						</div>
+						<div class="receiverMessage chatMessage">
+							<p>{{message.message}}</p>
+						</div>
 					</div>
 
-        </modal-footer>
-    </modal>
+				</div>
 
-	<!-- <div class="issues">
+			</div>
+		</modal-content>
+		<modal-footer>
+			<div class="col-sm-10 textInputDiv" (keydown)="keyDownFunction($event)">
+				<input type="text" name="" [(ngModel)]="textMessage" value="" placeholder="Type your message..">
+			</div>
+			<div class="col-sm-2 messageSendButtonDiv">
+				<button type="submit" class="btn btn-primary" (click)="sendMsg()">Send</button>
+			</div>
+
+		</modal-footer>
+	</modal>
+	<!--myModal.open(); openChat(m.$key,i);-->
+	<div class="issues">
 		<div class="row issuesRow">
-			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 issueCol" *ngFor="let issue of issue.Issues | async | emailFilter:value:searchedIssue:society:status">
-				<div class="content">
+			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 issueCol"  *ngFor="let i=index; let m of chats.queryList| async | queryFilter:login.UserIdentification | chatsFilter:value:searchedIssue:society:status">
+				<div class="content" style="cursor:pointer;" (click)=" openQuery(m.agentId,m.$key,i)">
+					<!--{{query.$key}}-->
 					<div class="col-xs-4 issueImage">
 						<div class="imgDiv">
-							<img src="{{issue.image}}" alt="">
+							<!-- <img src="{{issue.image}}" alt=""> -->
 						</div>
 					</div>
 					<div class="col-xs-8 issueDescription">
 						<div class="heading">
-							<h1>{{issue.title}}</h1>
+							<h1>{{m.userName}}</h1>
 						</div>
 						<div class="Description">
-							<h2>{{issue.description}}</h2>
+							<h2>{{getLastMessage(m.messages | json)}}</h2>
 						</div>
 					</div>
 					<div class="col-xs-6 date">
-						<h3>13.04.2017 10:20PM</h3>
+						<h3>{{m.openDateTime}}</h3>
 					</div>
 					<div class="col-xs-6 issueValue">
-						<select>
-						  <option value="volvo">Volvo</option>
-						  <option value="saab">Saab</option>
-						  <option value="mercedes">Mercedes</option>
-						  <option value="audi">Audi</option>
+						<select [(ngModel)]="m.status" (click)="stopPropogation($event)" (change)="onValueChange($event,m.$key)">
+						  <option value="unresolved">Unresolved</option>
+						  <option value="resolved">Resolved</option>
+						  <option value="spam">Spam</option>
 						</select>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 
 </div>

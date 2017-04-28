@@ -9,7 +9,7 @@ import * as firebase from "firebase";
 import { AngularFireModule } from 'angularfire2';
 import {PipeModule} from './Pipes/pipes.module';
 import {AppRoutingModule} from './Routes/index';
-import {LoginService,UserdataService} from './services/index';
+import {LoginService,UserdataService,chatService} from './services/index';
 import {Ng2PaginationModule} from 'ng2-pagination';
 import {AllissuesModule} from'./Allissues/index';
 import {pendingIssuesModule} from './pendingIssues/index';
@@ -46,7 +46,7 @@ firebase.initializeApp(firebaseConfig);
 		ModalModule,
     CoolStorageModule.forRoot()
   ],
-  providers: [LoginService,UserdataService],
+  providers: [LoginService,UserdataService,chatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,8 @@ export class LoginService {
 		this.Local=localStorage;
 	}
 
-
+	UserIdentification:any;
+	adminProfile:any;
 	checkUserStatus: boolean = false;
 
 	redirectTo:any='/allissues';
@@ -34,6 +35,7 @@ export class LoginService {
 	}
 
 	checkUserIsAdmin(userId):any{
+		this.UserIdentification=userId;
 			firebase.database().ref('/users/' + userId + '/Isadmin').once('value').then((data: any) => {
 				if (data.val() == 'true' || data.val()) {
 					if(this.redirectTo == '/login'){
@@ -41,6 +43,9 @@ export class LoginService {
 					}
 					this.checkUserStatus = true;
 					this.router.navigate([this.redirectTo]);
+					this.af.database.object('users/'+this.UserIdentification+'/profile').subscribe((profile:any)=>{
+						this.adminProfile=profile;
+					});
 				} else {
 					alert('You are not an Admin');
 					this.checkUserStatus = false;
